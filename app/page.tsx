@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import SiteHeader from "@/components/site-header";
 
 type Tool = { name: string; description: string; category: string; icon: string; status: "Ready" | "Coming soon"; featured?: boolean };
@@ -69,6 +69,7 @@ function CsvValidator() {
 
 export default function Home() {
  const [query,setQuery]=useState(""); const [active,setActive]=useState("All tools");
+ useEffect(()=>{const initial=new URLSearchParams(window.location.search).get("q");if(initial)setQuery(initial);},[]);
  const filtered=useMemo(()=>tools.filter(t=>(active==="All tools"||t.category===active)&&(`${t.name} ${t.description} ${t.category}`.toLowerCase().includes(query.toLowerCase()))),[query,active]);
  return <main>
   <SiteHeader/>
