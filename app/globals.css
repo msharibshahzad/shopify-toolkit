@@ -17,3 +17,6 @@
 
 /* Center the interactive tool workspace on individual tool pages */
 .single-workspace{margin-inline:auto}.single-note{text-align:center}
+
+/* Center tool workspace and separate the FAQ block beneath the full article */
+.single-workspace{width:100%;max-width:650px;margin-left:auto;margin-right:auto;display:flex;justify-content:center;align-items:stretch}.single-workspace>*{width:100%;max-width:100%}.tool-faq-section{margin-top:48px;padding-top:38px;border-top:1px solid var(--line)}.tool-faq-section h2{font-size:clamp(27px,4vw,38px);letter-spacing:-1.5px;margin:10px 0 12px;line-height:1.15}
