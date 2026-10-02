@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import SiteHeader from "@/components/site-header";
+import ToolClient from "./tool-client";
 const toolMap: Record<string,{title:string;category:string;description:string;intro:string}> = {
  "product-title":{title:"Product title generator",category:"Product SEO",description:"Draft clear, keyword-aware product titles from your product details.",intro:"Create a concise product title that combines your product name and target keyword."},
  "product-description":{title:"Product description writer",category:"Product SEO",description:"Turn product features into structured, customer-friendly copy.",intro:"Turn your product details into an editable description draft."},
@@ -20,4 +21,4 @@ export async function generateMetadata({params}:{params:Promise<{slug:string}>})
 export default async function ToolPage({params}:{params:Promise<{slug:string}>}){const {slug}=await params;const tool=toolMap[slug];if(!tool)return <main><SiteHeader/><section className="single-tool"><h1>Tool not found</h1><Link href="/">Back to all tools</Link></section></main>;
 return <main><SiteHeader/><section className="single-tool"><div className="breadcrumbs"><Link href="/">Home</Link> / <Link href="/#tools">Tools</Link> / {tool.title}</div><span className="eyebrow">{tool.category.toUpperCase()}</span><h1>{tool.title}</h1><p className="single-lead">{tool.intro}</p><ToolWorkspace slug={slug}/><div className="single-note">Free to use · No account required · Review generated content for accuracy before publishing.</div></section><footer className="single-footer"><span>© {new Date().getFullYear()} Shopify Toolkit. Independent project; not affiliated with Shopify Inc.</span><Link href="/">← Browse all tools</Link></footer></main>}
 function ToolWorkspace({slug}:{slug:string}){return <div className="single-workspace"><ToolForm key={slug} slug={slug}/></div>}
-function ToolForm({slug}:{slug:string}){ "use client"; return <ToolClient slug={slug}/> }
+function ToolForm({slug}:{slug:string}){ return <ToolClient slug={slug}/> }
